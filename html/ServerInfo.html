@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>ServerInfo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<style type="text/css">
+* {margin: 0px;padding: 0px;font-size:14px;color:#333;font-family:"仿宋"}
+.box{float:left;padding:5px;background:#f0f0f0;border:1px solid #eee;min-width:150px;margin:10px 0px 0px 10px;}
+.box h2{border-bottom:2px solid #ccc;padding:5px;padding-top:0px;}
+.box div{padding:5px;line-height:20px;}
+.box label{font-weight:bolder;}
+a{text-decoration:none;color:blue;}
+a:hover{text-decoration:underline;color:red;}
+</style>
+</head>
+<body>
+    <div style="padding:10px;margin-top:10px;">
+        <b><a href="/reload" target="_blank" id="reload">重新加载</a></b>
+    </div>
+	<div class="box">
+	    <h2>服务器</h2>
+	    <div>
+	        <label>CPU:</label>$availableProcessors <br/>
+            <label>MM:</label>$maxMemory <br/>
+            <label>FM:</label>$freeMemory <br/>
+            <label>RS:</label>$roomSize<br/>
+            <label>PS:</label>$playerSize<br/>
+	    </div>
+	</div>
+	<div class="box">
+        <h2>在线玩家列表</h2>
+        <div>
+            #foreach($user in $playerList)
+                [$user.username]$user.nickname ($user.getQueueSize())<br/>
+            #end
+        </div>
+    </div>
+    <div class="box">
+        <h2>在线房间列表</h2>
+        <div>
+        #foreach($room in $roomList)
+            [$room.id]$room.title ($room.getUserSize())<br/>
+        #end
+        </div>
+   </div>
+   
+</body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+$(function(){
+    $("#reload").click(function(){
+        $.get(this.href, function(data){alert(data)});
+        return false;
+    });
+});
+</script>
+</html>
